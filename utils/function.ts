@@ -28,9 +28,10 @@
   };
  export const checkFault=(board:any)=>{
     for(let i=0;i<9;i++){
-        let arr=board[i].sort();
+let arr=[...board[i];
+        arr=arr.sort();
         for(let j=0;j<9;j++){
-            if(arr[j]==arr[j+1]){
+            if(arr[j]!=-1&&arr[j]==arr[j+1]){
                 return false;
             }
         }

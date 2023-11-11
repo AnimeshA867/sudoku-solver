@@ -11,7 +11,7 @@ const SolveButton = ({
 }) => {
   return (
     <button
-      className="border  ring-4 hover:bg-gradient-to-r from-red-500 via-purple-500 to-blue-500  py-3 px-8 text-[30px] font-semibold rounded-full group w-full disabled:cursor-not-allowed"
+      className="border  ring-4 hover:bg-gradient-to-r from-red-500 via-purple-500 to-blue-500  py-3 px-8 text-[30px] font-semibold rounded-full group w-full disabled:cursor-not-allowed text-center"
       onClick={solveSudoku}
       disabled={disabled}
     >

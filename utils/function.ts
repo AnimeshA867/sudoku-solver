@@ -35,5 +35,18 @@
             }
         }
     }
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      const currentRow = 0 + i;
+      const currentCol = 0 + j;
+        for(let k=1;k<=9;k++){
+
+            if (board[currentRow][currentCol] === k) {
+                return false; // Number is repeated in the grid
+            }
+      }
+    }
+  }
+  
     return true;
  }

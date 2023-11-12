@@ -121,7 +121,7 @@ const Playground = () => {
                         (idx + 1) % 3 === 0
                           ? `border-r-4 dark:border-black border-gray-500`
                           : ``
-                      } [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border-collapse text-[25px] text-black text-center font-bold aspect-square p-2  xl:max-w-[80px] xl:max-h-[80px] md:w-[50px] md:h-[50px] w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] transition-all duration-300  rounded-none ${
+                      } [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border-collapse text-[15px] sm:text-[25px] text-black text-center font-bold aspect-square p-2  xl:max-w-[80px] xl:max-h-[80px] md:w-[50px] md:h-[50px] w-[40px] h-[40px] sm:w-[45px] sm:h-[45px] transition-all duration-300  rounded-none ${
                         solve && typeof board[gridIdx][idx] == "string"
                           ? `bg-sky-200`
                           : `group-odd:odd:bg-gray-300 group-odd:even:bg-gray-200 group-even:even:bg-gray-300 group-even:odd:bg-gray-200`

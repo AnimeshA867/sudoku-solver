@@ -33,7 +33,6 @@
   export const checkFault=(board:any)=>{
     console.log(board);
     for(let i=0;i<9;i++){
-<<<<<<< HEAD
         let obj:{[key:number]:number}={
            1:0,
            2:0,
@@ -115,29 +114,6 @@
           if(obj[i]>=2){
             return false;
           }
-=======
-let arr=[...board[i]];
-        arr=arr.sort();
-        for(let j=0;j<9;j++){
-            if(arr[j]!=-1&&arr[j]==arr[j+1]){
-                return false;
-            }
-        }
-    }
-    for(let a=0;a<7;a=a+3){
-for(let b=0; b<7;b=b+3){
-        for (let i = a; i < a+3; i++) {
-            for (let j = a; j < a+3; j++) {
-                const currentRow = 0 + i;
-                const currentCol = 0 + j;
-                for(let k=1;k<=9;k++){
-                    
-                    if (board[currentRow][currentCol] === k) {
-                        return false; // Number is repeated in the grid
-                    }
-                }
-            }
->>>>>>> c2aed8fb8139c21ce687b58b69a6871ce5e9163d
         }
   }}
   

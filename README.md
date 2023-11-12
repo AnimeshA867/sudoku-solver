@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Sudoku Solver
+
+A simple Sudoku solver implemented in Next JS using naive approach to efficiently solve puzzles of varying difficulty levels.
+
+## Features
+
+- **Efficient Solver:** Quickly solves Sudoku puzzles.
 
 ## Getting Started
 
-First, run the development server:
+### Demo
+
+Go to the link [https://sudokusolverbyanimesh.vercel.app](https://sudokusolverbyanimesh.vercel.app) to checkout the demo of the website.
+
+### Prerequisites
+
+- Node JS
+
+### Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/AnimeshA867/sudoku-solver.git
+cd sudoku-solver
+npm install
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+npm run dev
 
-## Learn More
+```
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+yarn run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Contributions are welcome! Follow these steps:
 
-## Deploy on Vercel
+1. Fork the project.
+2. Create a feature branch (`git checkout -b feature/YourFeature`).
+3. Commit your changes (`git commit -m 'Add some feature'`).
+4. Push to the branch (`git push origin feature/YourFeature`).
+5. Open a pull request.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Acknowledgements
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [GeeksForGeeks](https://www.geeksforgeeks.org/sudoku-backtracking-7/)
+
+```
+
+```

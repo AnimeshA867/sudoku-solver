@@ -31,7 +31,7 @@
 
 
   export const checkFault=(board:any)=>{
-    console.log(board);
+
     for(let i=0;i<9;i++){
         let obj:{[key:number]:number}={
            1:0,
@@ -117,6 +117,5 @@
         }
   }}
   
-} 
-return true;
+  return true;
 } 

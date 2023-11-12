@@ -15,6 +15,7 @@ const Playground = () => {
   const [solve, setSolve] = useState(false);
   const [error, setError] = useState(false);
   const [clicked, setClicked] = useState(false);
+  const [loading, setLoading] = useState(false);
   let newBoard: any;
   const handleChange: ChangeHandler = (i, j, value) => {
     // const newBoard = [...board];
@@ -23,37 +24,37 @@ const Playground = () => {
     setConstant(newBoard);
     setBoard(newBoard);
   };
-  useEffect(() => {
-    console.log(board);
-  }, [board]);
+
   const solveFunction = (boardData: any, row: number, col: number): any => {
+    setLoading(true);
     if (checkFault(boardData) == false) {
       return null;
-    }
-    let board = [...boardData];
-    if (row == 8 && col == 9) {
-      return true;
-    }
-
-    if (col == 9) {
-      row++;
-      col = 0;
-    }
-
-    if (board[row][col] > 0) {
-      return solveFunction(board, row, col + 1);
-    }
-
-    for (let num = 1; num <= 9; num++) {
-      if (isSafe(board, row, col, num)) {
-        board[row][col] = num;
-        if (solveFunction(board, row, col + 1)) {
-          return board;
-        }
+    } else {
+      const board = [...boardData];
+      if (row == 8 && col == 9) {
+        return true;
       }
-      board[row][col] = -1;
+
+      if (col == 9) {
+        row++;
+        col = 0;
+      }
+
+      if (board[row][col] > 0) {
+        return solveFunction(board, row, col + 1);
+      }
+
+      for (let num = 1; num <= 9; num++) {
+        if (isSafe(board, row, col, num)) {
+          board[row][col] = num;
+          if (solveFunction(board, row, col + 1)) {
+            return board;
+          }
+        }
+        board[row][col] = -1;
+      }
+      return null;
     }
-    return null;
   };
 
   const solveSudoku = () => {
@@ -61,11 +62,12 @@ const Playground = () => {
     let result = solveFunction(board, 0, 0);
     if (result == null) {
       setError(true);
-      setSolve(true);
+      // setSolve(true);
     } else {
       setBoard(result);
-      setSolve(true);
     }
+    setSolve(true);
+    setLoading(false);
   };
   const clearBoard = () => {
     setConstant(initialBoard);
@@ -77,6 +79,30 @@ const Playground = () => {
   return (
     <div className=" flex flex-col justify-evenly items-center gap-12 h-screen">
       <div className="flex justify-center items-center ">
+        {loading && (
+          <div
+            role="status"
+            className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+          >
+            <svg
+              aria-hidden="true"
+              className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+              viewBox="0 0 100 101"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                fill="currentColor"
+              />
+              <path
+                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                fill="currentFill"
+              />
+            </svg>
+            <span className="sr-only">Loading...</span>
+          </div>
+        )}
         <div className="grid grid-cols-1  aspect-square border-4 border-gray-500 border-collapse">
           {[...Array(9)].map((row, gridIdx) => {
             return (
@@ -95,22 +121,33 @@ const Playground = () => {
                         (idx + 1) % 3 === 0
                           ? `border-r-4 dark:border-black border-gray-500`
                           : ``
-                      }  border-collapse text-[25px] text-black text-center font-bold aspect-square p-2  xl:max-w-[80px] xl:max-h-[80px] md:w-[50px] md:h-[50px] w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] ${
-                        solve && typeof constant[gridIdx][idx] == "string"
+                      } [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none border-collapse text-[25px] text-black text-center font-bold aspect-square p-2  xl:max-w-[80px] xl:max-h-[80px] md:w-[50px] md:h-[50px] w-[30px] h-[30px] sm:w-[40px] sm:h-[40px] transition-all duration-300  rounded-none ${
+                        solve && typeof board[gridIdx][idx] == "string"
                           ? `bg-sky-200`
-                          : ` group-odd:odd:bg-gray-300 group-odd:even:bg-gray-200 group-even:even:bg-gray-300 group-even:odd:bg-gray-200 `
+                          : `group-odd:odd:bg-gray-300 group-odd:even:bg-gray-200 group-even:even:bg-gray-300 group-even:odd:bg-gray-200`
+                      } ${
+                        error && typeof board[gridIdx][idx] == "string"
+                          ? `bg-red-200`
+                          : ``
                       } ${
                         solve ? `pointer-events-none` : `pointer-events-auto`
                       } last:border-r-0`}
                       key={idx}
-                      // type="string"
+                      type="tel"
+                      min={1}
+                      max={9}
                       maxLength={1}
+                      pattern="[1-9]"
+                      inputMode="numeric"
                       value={
                         board[gridIdx][idx] !== -1 ? board[gridIdx][idx] : ""
                       }
                       onChange={(e) => {
                         let val = e.target.value;
-                        handleChange(gridIdx, idx, val);
+                        if (parseInt(val) >= 1 && parseInt(val) <= 9) {
+                          handleChange(gridIdx, idx, val);
+                        }
+                        return;
                       }}
                     ></input>
                   );
@@ -120,7 +157,7 @@ const Playground = () => {
           })}
         </div>
       </div>
-      <div className="grid md:grid-cols-2 grid-cols-1 md:w-1/2 lg:w-1/5 w-1/2 sm:w-1/3 gap-8 place-items-center justify-items-center ">
+      <div className="grid md:grid-cols-2 grid-cols-1 md:w-1/2 xl:w-1/5 lg:w-2/5 w-1/2 sm:w-1/3 gap-8 place-items-center justify-items-center ">
         <SolveButton solveSudoku={solveSudoku} disabled={solve} />
         <ClearButton clearBoard={clearBoard} />
       </div>
@@ -131,7 +168,7 @@ const Playground = () => {
               ? `left-[-100%]`
               : `top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2`
           } ${
-            error
+            error && solve
               ? `top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2`
               : `left-[-100%]`
           } text-[20px]  transition-all duration-700`}
@@ -149,7 +186,7 @@ const Playground = () => {
               viewBox="0 0 20 20"
               onClick={() => {
                 setClicked(true);
-                setError(false);
+                setSolve(false);
               }}
             >
               <title>Close</title>

@@ -4,6 +4,8 @@
     col: number,
     num: number
   ): boolean => {
+
+    
     for (let x = 0; x <= 8; x++) {
       if (board[row][x] == num) {
         return false;
@@ -26,30 +28,95 @@
     }
     return true;
   };
- export const checkFault=(board:any)=>{
+
+
+  export const checkFault=(board:any)=>{
+    console.log(board);
     for(let i=0;i<9;i++){
-        let arr=board[i].sort();
+        let obj:{[key:number]:number}={
+           1:0,
+           2:0,
+           3:0,
+           4:0,
+           5:0,
+           6:0,
+           7:0,
+           8:0,
+           9:0,
+         }
         for(let j=0;j<9;j++){
-            if(arr[j]==arr[j+1]){
-                return false;
+          if(board[i][j]!==-1){
+
+            obj[board[i][j]]++;
+          }
+        }
+        console.log(obj);
+        for(let a in obj ){
+          if(obj[a]>=2){
+            return false;
+          }
+        }
+      }
+      for(let i=0;i<9;i++){
+        let obj:{[key:number]:number}={
+          1:0,
+          2:0,
+          3:0,
+          4:0,
+          5:0,
+          6:0,
+          7:0,
+          8:0,
+          9:0,
+        }
+        for(let j=0;j<9;j++){
+          if(board[j][i]!==-1){
+            
+            obj[board[j][i]]++;
+          }
+        }
+        console.log(obj);
+        for(let a in obj){
+          if(obj[a]>=2){
+            return false;
+          }
+        }
+      }
+        
+      
+
+    
+    
+
+    for(let a=0;a<7;a=a+3){
+    for(let b=0;b<7;b=b+3){
+     let obj:{[key:number]:number}={
+        1:0,
+        2:0,
+        3:0,
+        4:0,
+        5:0,
+        6:0,
+        7:0,
+        8:0,
+        9:0,
+      }
+        for (let i = a; i < a+3; i++) {
+            for (let j = b; j < b+3; j++) {
+                let val:number=board[i][j];
+                   obj[val]++; 
+                   
             }
         }
-    }
-    for(let a=0;a<7;a+3){
 
-        for (let i = a; i < a+3; i++) {
-            for (let j = a; j < a+3; j++) {
-                const currentRow = 0 + i;
-                const currentCol = 0 + j;
-                for(let k=1;k<=9;k++){
-                    
-                    if (board[currentRow][currentCol] === k) {
-                        return false; // Number is repeated in the grid
-                    }
-                }
-            }
+    
+        for(let i=1;i<=9;i++){
+          if(obj[i]>=2){
+            return false;
+          }
         }
   }
   
-    return true;
- }
+} 
+return true;
+} 

@@ -36,8 +36,8 @@ let arr=[...board[i]];
             }
         }
     }
-    for(let a=0;a<7;a+3){
-
+    for(let a=0;a<7;a=a+3){
+for(let b=0; b<7;b=b+3){
         for (let i = a; i < a+3; i++) {
             for (let j = a; j < a+3; j++) {
                 const currentRow = 0 + i;
@@ -50,7 +50,7 @@ let arr=[...board[i]];
                 }
             }
         }
-  }
+  }}
   
     return true;
  }

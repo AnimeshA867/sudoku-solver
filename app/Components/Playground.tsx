@@ -6,6 +6,7 @@ import { isSafe, checkFault } from "@/utils/function";
 import ClearButton from "./ClearButton";
 const Playground = () => {
   type ChangeHandler = (gridIdx: number, idx: number, e: string) => void;
+  type removeHandler = (gridIdx: number, idx: number) => void;
 
   let initialBoard = Array.from({ length: 9 }, () => Array(9).fill(-1));
   const [board, setBoard] =
@@ -21,6 +22,13 @@ const Playground = () => {
     // const newBoard = [...board];
     newBoard = [...board];
     newBoard[i][j] = value;
+    setConstant(newBoard);
+    setBoard(newBoard);
+  };
+  const removeBoardData: removeHandler = (i, j) => {
+    // const newBoard = [...board];
+    newBoard = [...board];
+    newBoard[i][j] = "";
     setConstant(newBoard);
     setBoard(newBoard);
   };
@@ -144,8 +152,10 @@ const Playground = () => {
                       }
                       onChange={(e) => {
                         let val = e.target.value;
-                        if (parseInt(val) >= 1 && parseInt(val) <= 9||val=="Backspace") {
+                        if (parseInt(val) >= 1 && parseInt(val) <= 9) {
                           handleChange(gridIdx, idx, val);
+                        } else if (val == "Backspace") {
+                          removeBoardData(gridIdx, idx);
                         }
                         return;
                       }}

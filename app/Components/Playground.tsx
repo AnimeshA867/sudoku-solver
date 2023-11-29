@@ -144,7 +144,7 @@ const Playground = () => {
                       }
                       onChange={(e) => {
                         let val = e.target.value;
-                        if (parseInt(val) >= 1 && parseInt(val) <= 9) {
+                        if (parseInt(val) >= 1 && parseInt(val) <= 9||val=="Backspace") {
                           handleChange(gridIdx, idx, val);
                         }
                         return;

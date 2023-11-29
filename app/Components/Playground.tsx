@@ -156,6 +156,8 @@ const Playground = () => {
                           handleChange(gridIdx, idx, val);
                         } else if (val == "Backspace") {
                           removeBoardData(gridIdx, idx);
+                        }else{
+                          console.log(val);
                         }
                         return;
                       }}
